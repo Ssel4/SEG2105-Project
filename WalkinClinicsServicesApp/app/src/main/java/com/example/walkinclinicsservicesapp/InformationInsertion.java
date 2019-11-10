@@ -2,11 +2,9 @@ package com.example.walkinclinicsservicesapp;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
@@ -22,14 +20,11 @@ public class InformationInsertion extends AppCompatActivity {
     protected String role;
     protected Spinner spinner;
     protected static final String[] allRole = {"Patient", "Employee"};
-    protected DataBaseHelper account_DB;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        account_DB = new DataBaseHelper(this);
-
     }
 
     private static byte[] getSHA(String input) throws NoSuchAlgorithmException {
@@ -101,20 +96,18 @@ public class InformationInsertion extends AppCompatActivity {
                 Intent intentPatient = new Intent(getApplicationContext(), Patient.class);
                 intentPatient.putExtras(bundle);
                 startActivityForResult(intentPatient, 0);
-
                 break;
 
             case "Employee":
                 Intent intentEmployee = new Intent(getApplicationContext(), Employee.class);
                 intentEmployee.putExtras(bundle);
                 startActivityForResult (intentEmployee,0);
-
                 break;
+
             case "Admin":
                 Intent intentAdmin = new Intent(getApplicationContext(), Admin.class);
                 intentAdmin.putExtras(bundle);
                 startActivityForResult (intentAdmin,0);
-
                 break;
         }
 

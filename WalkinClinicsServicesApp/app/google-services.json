@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "378644347939",
+    "firebase_url": "https://lab5-6cdd7.firebaseio.com",
+    "project_id": "lab5-6cdd7",
+    "storage_bucket": "lab5-6cdd7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:378644347939:android:147cfda91599702eea8596",
+        "android_client_info": {
+          "package_name": "com.example.walkinclinicsservicesapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "378644347939-9sa0hiqlmj1gjphkardtmfmsvp0dc0bv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.walkinclinicsservicesapp",
+            "certificate_hash": "71610fd3c722370ee230af967d04024d8741e29f"
+          }
+        },
+        {
+          "client_id": "378644347939-ouubqlf93csd7r69pj8env4ai4hjo6bf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfB9Kk_F3W8CgfNCLF9axlpjIJ46H0bo0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "378644347939-ouubqlf93csd7r69pj8env4ai4hjo6bf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

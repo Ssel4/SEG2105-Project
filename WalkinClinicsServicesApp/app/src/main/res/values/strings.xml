@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Walk in Clinics Services App</string>
+    <string name="employee_role_assigned">Employee Role Assigned</string>
+    <string name="service_name">Service Name</string>
+</resources>

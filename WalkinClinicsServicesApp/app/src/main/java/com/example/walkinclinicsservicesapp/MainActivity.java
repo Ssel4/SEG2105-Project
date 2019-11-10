@@ -8,11 +8,11 @@ package com.example.walkinclinicsservicesapp;
 
 public class MainActivity extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
     }
 
 //new account
@@ -27,5 +27,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), LogIn.class);
         startActivityForResult (intent,0);
     }
+
 
 }

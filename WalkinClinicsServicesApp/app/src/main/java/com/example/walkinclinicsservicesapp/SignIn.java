@@ -17,7 +17,7 @@ public class SignIn extends InformationInsertion implements AdapterView.OnItemSe
 //used to create a new account
 
 
-    private static final  String [] allRole= { "Patient", "Employee"};
+    private static final  String [] allRole= { "Patient", "Employee","Admin"};
 
     private Button createAccountButton;
 
@@ -39,12 +39,13 @@ public class SignIn extends InformationInsertion implements AdapterView.OnItemSe
         spinner.setOnItemSelectedListener(this);
 
         createAccountButton = (Button) findViewById(R.id.createAccountButton);
-        createAccount();
+
+
     }
+
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
-
 
         switch (position) {
             case 0:
@@ -52,6 +53,9 @@ public class SignIn extends InformationInsertion implements AdapterView.OnItemSe
                 break;
             case 1:
                 this.role= allRole[1];
+                break;
+            case 2:
+                this.role=allRole[2];
                 break;
         }
     }
@@ -62,6 +66,7 @@ public class SignIn extends InformationInsertion implements AdapterView.OnItemSe
         // TODO Auto-generated method stub
     }
 
+
     private boolean realEmail(){
         String tmp = email.getText().toString();
         if (tmp.indexOf("@")==-1 || tmp.indexOf(".")==-1 || tmp.length()<6 ){
@@ -70,50 +75,38 @@ public class SignIn extends InformationInsertion implements AdapterView.OnItemSe
         return true;
     }
 
-    private boolean notValidInfo(){
-        if(realEmail()==false){
-            return true;
-        }
-        Cursor emailResult =  account_DB.getSpecificAccountData(name.getText().toString(),email.getText().toString(),role);
-
-        if(emailResult.getCount()>0){
-            while(emailResult.moveToNext()){
-                if( (emailResult.getString(2).equalsIgnoreCase(email.getText().toString()) )&&( emailResult.getString(3).equalsIgnoreCase(role)) ){
-                    Toast.makeText(SignIn.this,"Use different email.\n",Toast.LENGTH_SHORT).show();
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
 
     private boolean addData(){
+
+        DBHelper account_DB = new DBHelper(this);
+
         if(name.getText().toString().isEmpty() || email.getText().toString().isEmpty() || role.isEmpty() || password.getText().toString().isEmpty()){
             return false;
         }
-        if(notValidInfo()){
+        if(!realEmail()){
             return false;
         }
+        if(account_DB.emailExist(email.getText().toString())){
+            return false;
+        }
+
+        account_DB = new DBHelper(this);
 
         return account_DB.createAccount(name.getText().toString(), email.getText().toString(), role, toHashValue(password.getText().toString()));
     }
 
 
-    public void createAccount(){
-        createAccountButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(addData()){
+    public void createAccount(View v) {
 
-                    Bundle bundle = new Bundle();
-                    openNewClassAccount( bundle);
-                }
-                else{
-                    Toast.makeText(SignIn.this,"Account not created.\n",Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+        if(addData()){
+            Bundle bundle = new Bundle();
+            openNewClassAccount( bundle);
+        }
+        else{
+            Toast.makeText(SignIn.this,"Account not created.\n",Toast.LENGTH_SHORT).show();
+        }
     }
+
 }
 
 

@@ -1,6 +1,8 @@
 package com.example.walkinclinicsservicesapp;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -8,12 +10,11 @@ import android.widget.TextView;
 public class Patient extends User {
 
 
-    private TextView simpleTxtView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_patient);
+        setContentView(R.layout.activity_welcome);
 
         role = getIntent().getExtras().getString("role");
         name = getIntent().getExtras().getString("userName");
@@ -36,7 +37,24 @@ public class Patient extends User {
         currentRole.setText("Role : "+role);
 
         continueButton = (Button)findViewById(R.id.continueButton);
+        continueButton.setText("Continue: view services.");
+
+        toServicesList();
 
 
     }
+
+    public void toServicesList(){
+        continueButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                //to service activity
+                //Intent intent = new Intent(getApplicationContext(), stuff.class);
+                //startActivityForResult(intent, 0);
+            }
+        });
+
+    }
+
 }

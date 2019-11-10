@@ -35,14 +35,14 @@ public class LogIn extends InformationInsertion implements AdapterView.OnItemSel
 
         spinner = (Spinner)findViewById(R.id.spinnerRole);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(LogIn.this, android.R.layout.simple_spinner_item,allRole);
-
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
 
         logInButton = (Button)findViewById(R.id.logInButton);
-        logInAccount();
+
     }
+
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
@@ -66,30 +66,18 @@ public class LogIn extends InformationInsertion implements AdapterView.OnItemSel
     }
 
 
-    public void logInAccount(){
-        logInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                Cursor nameResult = account_DB.getSpecificAccountData(name.getText().toString(),email.getText().toString(),role);
 
-                if(nameResult.getCount()>0){
-                    while(nameResult.moveToNext()){
+    public void logInAccount(View v) {
 
-                        if(nameResult.getString(1).equalsIgnoreCase(name.getText().toString()) && nameResult.getString(2).equalsIgnoreCase(email.getText().toString()) && nameResult.getString(3).equalsIgnoreCase(role)&& nameResult.getString(4).equalsIgnoreCase(toHashValue(password.getText().toString()))){
-                            Bundle bundle = new Bundle();
-                            bundle.putString("ID",nameResult.getString((0)));
-                            openClassAccount(bundle);
-                        }
+        DBHelper account_DB = new DBHelper(this);
+        if(account_DB.logInAccount(name.getText().toString(),email.getText().toString(),role,toHashValue(password.getText().toString()))){
 
-                        else{
-                            Toast.makeText(LogIn.this,"Incorrect account info.",Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                }
-            }
-        });
+            Bundle bundle = new Bundle();
+            openClassAccount(bundle);
+        }
     }
+
+
 
 }
